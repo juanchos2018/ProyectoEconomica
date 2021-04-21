@@ -10,24 +10,19 @@ import Entidad.ClsVendedor;
 import Interface.InterfaceProveedor;
 import Presentacion.Principal;
 
-/**
- *
- * @author usuario
- */
+
 public class ClsNegProveedor implements InterfaceProveedor {
 
     @Override
     public void Registar(ClsProveedor o) {
         
-        Principal.listaProveedor.add(o);
-        
+        Principal.listaProveedor.add(o);        
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public boolean Existe(String ruc) {
-        
-         
+                
         boolean exite_ruc=false;
         for (ClsProveedor item :  Principal.listaProveedor) {
          

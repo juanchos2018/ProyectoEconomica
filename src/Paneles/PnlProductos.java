@@ -5,40 +5,26 @@
  */
 package Paneles;
 
-import Entidad.ClsVendedor;
-import Negocio.ClsNegVendedor;
+import Entidad.ClsClientes;
+import Entidad.ClsProducto;
+import Negocio.ClsNegCliente;
+import Negocio.ClsNegProducto;
 import Presentacion.Principal;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
-/**
- *
- * @author usuario
- */
-public class PnlVendedor extends javax.swing.JPanel {
 
- 
-     ClsVendedor objVendedor;
-    ClsNegVendedor objNegVendedor;
-    
-     String []Titulos={"Cedula","Nombres","Apellidos","Celular","SExo"};
+public class PnlProductos extends javax.swing.JPanel {
+
+    String []Titulos={"codigo","descripcion ","cantidad","precio"};
     DefaultTableModel dtm=new DefaultTableModel(null,Titulos);
-    
-    public PnlVendedor() {
+    ClsProducto objProducto;
+    ClsNegProducto objNegProducto;
+    public PnlProductos() {
         initComponents();
-        
-         objNegVendedor=new ClsNegVendedor();
+        objNegProducto= new ClsNegProducto();
         ListarRegistro();
     }
 
-
-     public String leerBusqueda(){
-        String busca=txtfldshdFiltrarDatos.getText().trim().replace("", "");
-        return busca;
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,9 +35,9 @@ public class PnlVendedor extends javax.swing.JPanel {
     private void initComponents() {
 
         btnshdAgregar = new rscomponentshade.RSButtonShade();
-        txtfldshdFiltrarDatos = new rscomponentshade.RSTextFieldShade();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblVendedores = new javax.swing.JTable();
+        tblProvedores = new javax.swing.JTable();
+        txtfldshdFiltrarDatos = new rscomponentshade.RSTextFieldShade();
 
         btnshdAgregar.setBackground(new java.awt.Color(0, 51, 102));
         btnshdAgregar.setText("Agregar");
@@ -64,20 +50,10 @@ public class PnlVendedor extends javax.swing.JPanel {
             }
         });
 
-        txtfldshdFiltrarDatos.setForeground(new java.awt.Color(0, 51, 102));
-        txtfldshdFiltrarDatos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtfldshdFiltrarDatos.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        txtfldshdFiltrarDatos.setPlaceholder("Filtrar Datos");
-        txtfldshdFiltrarDatos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtfldshdFiltrarDatosKeyTyped(evt);
-            }
-        });
-
-        tblVendedores.setBackground(new java.awt.Color(0, 51, 102));
-        tblVendedores.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        tblVendedores.setForeground(new java.awt.Color(255, 255, 255));
-        tblVendedores.setModel(new javax.swing.table.DefaultTableModel(
+        tblProvedores.setBackground(new java.awt.Color(0, 51, 102));
+        tblProvedores.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tblProvedores.setForeground(new java.awt.Color(255, 255, 255));
+        tblProvedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -88,12 +64,27 @@ public class PnlVendedor extends javax.swing.JPanel {
 
             }
         ));
-        tblVendedores.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblProvedores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblVendedoresMouseClicked(evt);
+                tblProvedoresMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblVendedores);
+        jScrollPane1.setViewportView(tblProvedores);
+
+        txtfldshdFiltrarDatos.setForeground(new java.awt.Color(0, 51, 102));
+        txtfldshdFiltrarDatos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtfldshdFiltrarDatos.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        txtfldshdFiltrarDatos.setPlaceholder("Filtrar Datos");
+        txtfldshdFiltrarDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfldshdFiltrarDatosActionPerformed(evt);
+            }
+        });
+        txtfldshdFiltrarDatos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtfldshdFiltrarDatosKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -105,7 +96,7 @@ public class PnlVendedor extends javax.swing.JPanel {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnshdAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 475, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
                         .addComponent(txtfldshdFiltrarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(25, 25, 25))
         );
@@ -117,7 +108,7 @@ public class PnlVendedor extends javax.swing.JPanel {
                     .addComponent(btnshdAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtfldshdFiltrarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -136,55 +127,52 @@ public class PnlVendedor extends javax.swing.JPanel {
         //        f.meterPanel(jpnale);
         //        f.show();
 
-    //    new ClsCambiarPanel(Principal.pnlPrincipalPaneles, new Paneles.PnlRegistrarProveedor());
+       new ClsCambiarPanel(Principal.pnlPrincipalPaneles, new Paneles.PnlAgrearProducto());
+       //        new ClsCambiarPanel(Principal.pnlPrincipalPaneles, new Paneles.PnlRegistrarCliente());
         //   frmPrincipal.lblInicio.setText("Registro de Nuevo Suministro");
-        
-         new ClsCambiarPanel(Principal.pnlPrincipalPaneles, new Paneles.PnlRegistrarVendedor());
-
     }//GEN-LAST:event_btnshdAgregarActionPerformed
 
-     public void ListarRegistro(){        
-        Object fila[] = new Object[dtm.getColumnCount()];
-        for(int i = 0; i < objNegVendedor.CantidadRegistro(); i++){
-            objVendedor = objNegVendedor.ObtenerRegistro(i);
-            fila[0] = objVendedor.getDni();
-            fila[1] = objVendedor.getNombre();
-            fila[2] = objVendedor.getApellido();
-            fila[3] = objVendedor.getCelular();
-            fila[4] = objVendedor.getGenero();
-                  
-            dtm.addRow(fila);
-        }
-        tblVendedores.setModel(dtm);        
-    }
-    
-    
-    private void tblVendedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVendedoresMouseClicked
+    private void tblProvedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProvedoresMouseClicked
         // MtdSeleccionarTablaManteniemto();
+    }//GEN-LAST:event_tblProvedoresMouseClicked
 
-    }//GEN-LAST:event_tblVendedoresMouseClicked
+    private void txtfldshdFiltrarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfldshdFiltrarDatosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfldshdFiltrarDatosActionPerformed
 
-    TableRowSorter trs;
-    
     private void txtfldshdFiltrarDatosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfldshdFiltrarDatosKeyTyped
         // TODO add your handling code here:
-        
-         // TableRowSorter trs;
-         txtfldshdFiltrarDatos.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent ke) {
-                trs.setRowFilter(RowFilter.regexFilter("(?i)"+leerBusqueda(), 0,1,2,3)); //Filtra datos
-            }
-        });
-        trs=new TableRowSorter(dtm);
-        tblVendedores.setRowSorter(trs);
+        // TableRowSorter trs;
+        //        txtfldshdFiltrarDatos.addKeyListener(new KeyAdapter() {
+            //            @Override
+            //            public void keyReleased(KeyEvent ke) {
+                //                trs.setRowFilter(RowFilter.regexFilter("(?i)"+leerBusqueda(), 0,1,2,3)); //Filtra datos
+                //            }
+            //        });
+    //        trs=new TableRowSorter(dtm);
+    //        tblProvedores.setRowSorter(trs);
     }//GEN-LAST:event_txtfldshdFiltrarDatosKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rscomponentshade.RSButtonShade btnshdAgregar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblVendedores;
+    private javax.swing.JTable tblProvedores;
     private rscomponentshade.RSTextFieldShade txtfldshdFiltrarDatos;
     // End of variables declaration//GEN-END:variables
+
+    private void ListarRegistro() {
+      //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+       Object fila[] = new Object[dtm.getColumnCount()];
+        for(int i = 0; i < objNegProducto.CantidadRegistro(); i++){
+            objProducto = objNegProducto.ObtenerRegistro(i);
+            fila[0] = objProducto.getIdproducto();
+            fila[1] = objProducto.getDescripcion();
+            fila[2] = objProducto.getPrecio();
+            fila[3] = objProducto.getCantidad();              
+            dtm.addRow(fila);
+        }
+        tblProvedores.setModel(dtm);  
+    }
 }

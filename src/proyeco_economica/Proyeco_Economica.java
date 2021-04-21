@@ -5,6 +5,8 @@
  */
 package proyeco_economica;
 
+import Presentacion.Principal;
+
 /**
  *
  * @author usuario
@@ -16,6 +18,9 @@ public class Proyeco_Economica {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+     Principal p = new Principal();   
+     p.show();
+        
     }
     
 }

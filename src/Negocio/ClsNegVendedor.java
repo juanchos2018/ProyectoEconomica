@@ -17,19 +17,15 @@ import Presentacion.Principal;
 public class ClsNegVendedor implements Metodos {
 
     @Override
-    public void Registar(ClsVendedor o) {
-    
-        Principal.listaVendedor.add(o);                
-        
+    public void Registar(ClsVendedor o) {    
+        Principal.listaVendedor.add(o);   
     }
 
     @Override
-    public boolean Existe(String cedula) {
-        
+    public boolean Existe(String cedula) {        
         boolean exite_cedula=false;
-        for (ClsVendedor item :  Principal.listaVendedor) {
-         
-            if (cedula.equals(item.getCedula())) {
+        for (ClsVendedor item :  Principal.listaVendedor) {         
+            if (cedula.equals(item.getDni())) {
                 exite_cedula=true;
             }
             else{
@@ -50,10 +46,5 @@ public class ClsNegVendedor implements Metodos {
         return (ClsVendedor)Principal.listaVendedor.get(i);
     }
 
-  
- 
-    
-    
-    
-    
+        
 }

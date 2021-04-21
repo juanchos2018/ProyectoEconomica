@@ -221,48 +221,37 @@ public class PnlRegistrarProveedor extends javax.swing.JPanel {
             for(int i = 0; i < objNegVendedor.CantidadRegistro(); i++)
             {
             objVendedor = objNegVendedor.ObtenerRegistro(i);
-            cedulas[i]=objVendedor.getCedula();
+            cedulas[i]=objVendedor.getDni();
             contador++;
             combomdel.addElement(objVendedor.getNombre()+" "+objVendedor.getApellido());                
             
-           }
-           
+           }           
             cmboVendedor.setModel(combomdel);
             
     }
     private void btnshdRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnshdRegistrarActionPerformed
-  
-       
+        
           int cantidad=txtruc.getText().length();
-            if (cantidad<12  || cantidad>12 ) {
+            if (cantidad<13  || cantidad>13 ) {
               JOptionPane.showMessageDialog(null, "Ruc incorrecta","alto",1);
               return;
             }
-        
-        
+                
        String ruc=txtruc.getText().toString();
        String razon=txtrazonsocial.getText().toString();
        String tipo=cmbProducto.getSelectedItem().toString();
        String vendedor=cmboVendedor.getSelectedItem().toString();
        int pos = cmboVendedor.getSelectedIndex();
        String cedula =cedulas[pos];
-       
-       
-       
-       
-       
-       
+              
        String ced="";
        String nombre="";
        String  apellido="";
        String telefono="";
-       String genero="";
-       
-        for (ClsVendedor item : Principal.listaVendedor) {
-            
-            if (cedula.equals(item.getCedula())) {
-                
-                ced=item.getCedula();
+       String genero="";       
+        for (ClsVendedor item : Principal.listaVendedor) {            
+            if (cedula.equals(item.getDni())) {                
+                ced=item.getDni();
                 nombre=item.getNombre();
                 apellido=item.getApellido();
                 telefono=item.getCelular();

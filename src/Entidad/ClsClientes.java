@@ -9,13 +9,13 @@ package Entidad;
  *
  * @author usuario
  */
-public class ClsVendedor {
-
+public class ClsClientes {
+    
     String dni;
-    String apellido;
     String nombre;
-    String celular;
-    String genero;
+    String apellido;
+    String direccion;
+    String telefono;
 
     public String getDni() {
         return dni;
@@ -23,14 +23,6 @@ public class ClsVendedor {
 
     public void setDni(String dni) {
         this.dni = dni;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
     }
 
     public String getNombre() {
@@ -41,26 +33,28 @@ public class ClsVendedor {
         this.nombre = nombre;
     }
 
-    public String getCelular() {
-        return celular;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setCelular(String celular) {
-        this.celular = celular;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public String getGenero() {
-        return genero;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    
-   
+    public String getTelefono() {
+        return telefono;
+    }
 
-
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
     
 }
-

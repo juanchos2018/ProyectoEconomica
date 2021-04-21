@@ -27,7 +27,7 @@ public class PnlRegistrarVendedor extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        txtcedula = new rscomponentshade.RSTextFieldShade();
+        txtDni = new rscomponentshade.RSTextFieldShade();
         jLabel4 = new javax.swing.JLabel();
         txtnombres = new rscomponentshade.RSTextFieldShade();
         jLabel6 = new javax.swing.JLabel();
@@ -50,14 +50,14 @@ public class PnlRegistrarVendedor extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 51, 102));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Cedula");
+        jLabel5.setText("Documneto");
 
-        txtcedula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtcedula.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtcedula.setPlaceholder("Ingrese Cedula");
-        txtcedula.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtDni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDni.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDni.setPlaceholder("Ingrese Dni");
+        txtDni.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtcedulaKeyTyped(evt);
+                txtDniKeyTyped(evt);
             }
         });
 
@@ -126,10 +126,10 @@ public class PnlRegistrarVendedor extends javax.swing.JPanel {
                         .addGap(33, 33, 33)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtnombres, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                            .addComponent(txtcedula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txtDni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                         .addComponent(txtaepellido, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +149,7 @@ public class PnlRegistrarVendedor extends javax.swing.JPanel {
                         .addContainerGap()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtcelular, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel12))
                             .addComponent(jLabel5))
@@ -201,7 +201,7 @@ public class PnlRegistrarVendedor extends javax.swing.JPanel {
                 .addComponent(btnshdCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(128, 128, 128))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+                .addContainerGap(41, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
@@ -234,78 +234,80 @@ public class PnlRegistrarVendedor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnshdRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnshdRegistrarActionPerformed
-      
+            
+        
+        if (txtDni.getText().toString().equals("")) {
+              JOptionPane.showMessageDialog(null, "FAlta llear", "No", 1);
+              return;
+        }
            
-            String cedula=txtcedula.getText().toString();
+            String dni=txtDni.getText().toString();
             String nombre=txtnombres.getText().toString();
             String apellido=txtaepellido.getText().toString();
             String celular =txtcelular.getText().toString();
             String sexo =cmbGenero.getSelectedItem().toString();                    
-            
-             int suma=0; 
-             int resta=9;
-             int[] arrayCoeficientes= {2,1,2,1,2,1,2,1,2};
-             boolean mayoradiez=false;  
-             int immediataSuperior=0;
-             int digidio1=0;
-             int sumaresultado=0;
-             int total=0; 
-             int ultimodigito=0;
-             
-            int cantidad=txtcedula.getText().length();
-            if (cantidad<9  || cantidad>9 ) {
-              JOptionPane.showMessageDialog(null, "cedula incorrecta","alto",1);
-              return;
-            }
-                             
-         int cantidadcelular=txtcelular.getText().length();
-            if (cantidadcelular<10  || cantidadcelular>10 ) {
-              JOptionPane.showMessageDialog(null, "Telefono incorrecta","alto",1);
-              return;
-            }
-            
-            String ced=txtcedula.getText().toString();           
-          
-            int[] arrayint = new int[cantidad];
-             int[] arrayResultado = new int[cantidad];
-            
-           for(int i = 0; i < cantidad; i++){
-              //  array[i] = String.valueOf(ced.charAt(i));                
-                arrayint[i]=Integer.parseInt(String.valueOf(ced.charAt(i)));      
-                
-           }
-                               
-            for (int i = 0; i < arrayint.length; i++) {
-                int multi=0;
-                multi=arrayint[i] * arrayCoeficientes[i];
-                arrayResultado[i] = arrayint[i] * arrayCoeficientes[i];
-                if (multi>=10) {
-                    mayoradiez=true;
-                }
-            }
-                 
-       
-        for (int i = 0; i < arrayint.length; i++) {                        
-                System.out.println(arrayResultado[i]);  
-                suma+=arrayint[i];                
-              sumaresultado+=arrayResultado[i];
-           }
-          
-        if (mayoradiez) {
-             total=sumaresultado-resta;
-         }
-        else{
-            total =sumaresultado;
-        }
+              Registrar(dni,nombre,apellido,celular,sexo); 
+//             int suma=0; 
+//             int resta=9;
+//             int[] arrayCoeficientes= {2,1,2,1,2,1,2,1,2};
+//             boolean mayoradiez=false;  
+//             int immediataSuperior=0;
+//             int digidio1=0;
+//             int sumaresultado=0;
+//             int total=0; 
+//             int ultimodigito=0;
+//             
+//            int cantidad=txtcedula.getText().length();
+//            if (cantidad<9  || cantidad>9 ) {
+//              JOptionPane.showMessageDialog(null, "cedula incorrecta","alto",1);
+//              return;
+//            }
+//                             
+//         int cantidadcelular=txtcelular.getText().length();
+//            if (cantidadcelular<10  || cantidadcelular>10 ) {
+//              JOptionPane.showMessageDialog(null, "Telefono incorrecta","alto",1);
+//              return;
+//            }
+//            
+//            String ced=txtcedula.getText().toString();           
+//          
+//            int[] arrayint = new int[cantidad];
+//             int[] arrayResultado = new int[cantidad];
+//            
+//           for(int i = 0; i < cantidad; i++){
+//              //  array[i] = String.valueOf(ced.charAt(i));                
+//                arrayint[i]=Integer.parseInt(String.valueOf(ced.charAt(i)));      
+//                
+//           }                               
+//            for (int i = 0; i < arrayint.length; i++) {
+//                int multi=0;
+//                multi=arrayint[i] * arrayCoeficientes[i];
+//                arrayResultado[i] = arrayint[i] * arrayCoeficientes[i];
+//                if (multi>=10) {
+//                    mayoradiez=true;
+//                }
+//            }
+//           for (int i = 0; i < arrayint.length; i++) {                        
+//                System.out.println(arrayResultado[i]);  
+//                suma+=arrayint[i];                
+//              sumaresultado+=arrayResultado[i];
+//           }
+//          
+//        if (mayoradiez) {
+//             total=sumaresultado-resta;
+//         }
+//        else{
+//            total =sumaresultado;
+//        }
         
      
-        String numeros =String.valueOf(total);      
-        immediataSuperior=total+10;                 
-        char n =numeros.charAt(1);
-        digidio1=Integer.parseInt(String.valueOf(n));
-        immediataSuperior=immediataSuperior-digidio1;       
-        ultimodigito=immediataSuperior-total;                 
-     
+//        String numeros =String.valueOf(total);      
+//        immediataSuperior=total+10;                 
+//        char n =numeros.charAt(1);
+//        digidio1=Integer.parseInt(String.valueOf(n));
+//        immediataSuperior=immediataSuperior-digidio1;       
+//        ultimodigito=immediataSuperior-total;                 
+//     
         
 //        StringBuilder myName = new StringBuilder(ced);
 //        String u =String.valueOf("12"+ultimodigito);
@@ -314,11 +316,10 @@ public class PnlRegistrarVendedor extends javax.swing.JPanel {
 //        myName.setCharAt(8, v);
 //        System.out.println(myName);
                     
-        String nuevocedula =String.valueOf(ced)+String.valueOf(ultimodigito);
-     //    txtsuma.setText(""+ suma +","+total  +"," + n+"," +immediataSuperior+", " +  nuevocedula);  
-      txtsuma.setVisible(false);
-     
-         Registrar(nuevocedula,nombre,apellido,celular,sexo);   
+//        String nuevocedula =String.valueOf(ced)+String.valueOf(ultimodigito);   
+//        txtsuma.setVisible(false);
+//      
+         
             
     }//GEN-LAST:event_btnshdRegistrarActionPerformed
 
@@ -327,7 +328,7 @@ public class PnlRegistrarVendedor extends javax.swing.JPanel {
           Principal.lblInicio.setText("Gestión Vendedor");
     }//GEN-LAST:event_btnshdCancelarActionPerformed
 
-    private void txtcedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcedulaKeyTyped
+    private void txtDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniKeyTyped
         
         char validar =evt.getKeyChar();
         if (Character.isLetter(validar)) {
@@ -336,7 +337,7 @@ public class PnlRegistrarVendedor extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Solo Numeros", "No", 1);
             
         }
-    }//GEN-LAST:event_txtcedulaKeyTyped
+    }//GEN-LAST:event_txtDniKeyTyped
 
     private void txtnombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombresKeyTyped
         // TODO add your handling code here:
@@ -385,32 +386,32 @@ public class PnlRegistrarVendedor extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel5;
+    private rscomponentshade.RSTextFieldShade txtDni;
     private rscomponentshade.RSTextFieldShade txtaepellido;
-    private rscomponentshade.RSTextFieldShade txtcedula;
     private rscomponentshade.RSTextFieldShade txtcelular;
     private rscomponentshade.RSTextFieldShade txtnombres;
     private javax.swing.JTextField txtsuma;
     // End of variables declaration//GEN-END:variables
 
-    private void Registrar(String cedula, String nombre, String apellido, String celular, String sexo) {
+    private void Registrar(String dni, String nombre, String apellido, String celular, String sexo) {
         
         ClsVendedor  o = new ClsVendedor();
         ClsNegVendedor ob = new  ClsNegVendedor();
         
-        if (ob.Existe(cedula)) {
+        if (ob.Existe(dni)) {
             
             JOptionPane.showMessageDialog(null, "existe", "Existe vendedor", 1);
         }
         else{
             
-            o.setCedula(cedula);
+            o.setDni(dni);
             o.setNombre(nombre);
             o.setApellido(apellido);
             o.setCelular(celular);
             o.setGenero(sexo);
             ob.Registar(o);
             
-             JOptionPane.showMessageDialog(null, "Registrado", "Registado Vendedor", 1);
+            JOptionPane.showMessageDialog(null, "Registrado", "Registado Vendedor", 1);
         }
         
        //To change body of generated methods, choose Tools | Templates.
